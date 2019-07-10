@@ -1,0 +1,5 @@
+php artisan migrate
+php artisan make:auth
+php artisan make:controller AdminController
+php artisan config:clear
+php artisan serve
