@@ -1,2 +1,2 @@
-# admin_laravel
+# admin
 ad
