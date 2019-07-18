@@ -1,0 +1,10 @@
+php artisan migrate
+php artisan make:auth
+php artisan make:controller AdminController
+php artisan make:controller CategoryController
+php artisan make:model Category
+php artisan config:clear
+php artisan serve
+
+php artisan make:migration create_category_table
+php artisan make:migration create_products_table
