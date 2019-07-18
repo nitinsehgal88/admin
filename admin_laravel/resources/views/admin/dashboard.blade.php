@@ -285,13 +285,13 @@
               <div class="widget-content tab-content">
                 <div id="tab1" class="tab-pane active">
                   <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
-                  <img src="images/backend_images/demo/demo-image1.jpg" alt="demo-image"/></div>
-                <div id="tab2" class="tab-pane"> <img src="images/backend_images/demo/demo-image2.jpg" alt="demo-image"/>
+                  <img src="{{ asset('images/backend_images/demo-image1.jpg') }}" alt="demo-image"/></div>
+                <div id="tab2" class="tab-pane"> <img src="{{ asset('images/backend_images/demo-image2.jpg') }}" alt="demo-image"/>
                   <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
                 </div>
                 <div id="tab3" class="tab-pane">
                   <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. </p>
-                  <img src="images/backend_images/demo/demo-image3.jpg" alt="demo-image"/></div>
+                  <img src="{{ asset('images/backend_images/demo-image3.jpg') }}" alt="demo-image"/></div>
               </div>
             </div>
           </div>

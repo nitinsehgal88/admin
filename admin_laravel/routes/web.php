@@ -16,13 +16,27 @@ Route::get('/', function () {
 });
 
 
-// Route::get('/admin','AdminController@login');
-
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
-Route::get('/admin/dashboard', 'AdminController@dashboard');
 
 Auth::routes();
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/dashboard', 'AdminController@dashboard');      
+    Route::get('/admin/check-pwd', 'AdminController@chkPassword');
+    Route::post('/admin/update-pwd', 'AdminController@chkPassword');
+    Route::match(['get', 'post'], '/admin/settings', 'AdminController@settings');
+
+    // Category Routes
+    Route::match(['get', 'post'], '/admin/add-category', 'CategoryController@addCategory');
+    Route::match(['get', 'post'], '/admin/edit-category/{id}', 'CategoryController@editCategory');
+    Route::match(['get', 'post'], '/admin/delete-category/{id}', 'CategoryController@deleteCategory');
+    Route::get('admin/view-categories', 'CategoryController@viewCategories');
+
+    // Products Routes
+    Route::match(['get', 'post'], '/admin/add-products', 'ProductsController@addProduct');
+    Route::match(['get', 'post'], '/admin/view-products', 'ProductsController@viewProduct');
+});
+Route::get('/logout', 'AdminController@logout')->name('logout');  
 Route::get('/home', 'HomeController@index')->name('home');
 
 
