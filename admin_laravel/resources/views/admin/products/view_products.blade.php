@@ -53,10 +53,13 @@
                   <td>{{ $product->price }}</td>
                   <td>
                     @if(!empty($product->image))
-                      <img src="{{ asset('/images/backend_images/products/small/'.$product->image) }}" style="width:60px;">
+                      <img src="{{ asset('/images/backend_images/products/large/'.$product->image) }}" style="width:60px;">
                     @endif
                   </td>
-                  <td class="center"><a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a> <a href="{{ url('/admin/edit-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a> <a id="delCat" href="{{ url('/admin/delete-product/'.$product->id) }}" class="btn btn-danger btn-mini">Delete</a></td>
+                  <td class="center"><a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
+                     <a href="{{ url('/admin/edit-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                  <a rel="{{ $product->id}}"  rell="delete-product"
+                    href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a></td>
                 </tr>
                     <div id="myModal{{ $product->id }}" class="modal hide">
                       <div class="modal-header">
@@ -66,11 +69,10 @@
                       <div class="modal-body">
                         <p>Product ID: {{ $product->id }}</p>
                         <p>Category ID: {{ $product->category_id }}</p>
+                        <p>Product Name: {{ $product->product_name }}</p>
                         <p>Product Code: {{ $product->product_code }}</p>
                         <p>Product Color: {{ $product->product_color }}</p>
-                        <p>Price: {{ $product->price }}</p>
-                        <p>Fabric: </p>
-                        <p>Material: </p>
+                        <p>Price: {{ $product->price }}</p>                        
                         <p>Description: {{ $product->description }}</p>
                       </div>
                     </div>

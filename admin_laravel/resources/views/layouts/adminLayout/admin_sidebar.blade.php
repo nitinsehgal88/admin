@@ -11,7 +11,7 @@
       <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> </a>
         <ul>
         <li><a href="{{ url('/admin/add-products')}}">Add Product</a></li>
-        <li><a href="{{ url('/admin/view-categories') }}">products</a></li>          
+        <li><a href="{{ url('/admin/view-products') }}">products</a></li>          
         </ul>
       </li>
       <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>

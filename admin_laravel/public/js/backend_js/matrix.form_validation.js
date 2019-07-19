@@ -126,7 +126,43 @@ $(document).ready(function(){
 	});
 	
 
-
+	$("#edit_product").validate({
+		rules:{
+			category_id:{
+				required:true
+			},
+			product_name:{
+				required:true
+			},
+			product_code:{
+				required:true
+			},
+			product_color:{
+				required:true
+			},
+			description:{
+				required:true				
+			},
+			price:{
+				required:true,				
+				number:true
+			},
+			url:{
+				required:true,
+				url: true
+			}
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+	
 	$("#number_validate").validate({
 		rules:{
 			min:{
@@ -188,4 +224,48 @@ $(document).ready(function(){
 		}
 		return false;
 	})
+
+	$("#delProd").click(function(){		
+		swal({
+			title: 'Confirm',
+			text: 'Are you sure to delete this message?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, sir',
+			cancelButtonText: 'Not at all'
+		 });
+		// if(confirm('Are you sure you want to delete this product?')){
+		// 	return true;
+		// }
+		// return false;
+	})
+
+	$(".deleteRecord").click(function(){
+		// alert("caleld");
+		var id = $(this).attr('rel');
+		var deleteFunction  = $(this).attr('rell');
+		// alert(id);
+		// alert(iddeleteFunction);
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted, you will not be able to recover this imaginary file!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		  })
+		  .then((willDelete) => {
+			if (willDelete) {				
+				swal("Poof! Your imaginary file has been deleted!", {
+				icon: "success",				
+			  });			  
+			  setTimeout(() => {
+				window.location.href="/admin/"+deleteFunction+"/"+id;	  
+			  }, 3000);
+			  
+			} else {
+			  swal("Your imaginary file is safe!");
+			}
+		  });
+		
+	});
 });
