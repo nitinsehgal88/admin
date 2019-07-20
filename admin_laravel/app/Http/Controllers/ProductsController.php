@@ -7,6 +7,7 @@ use Session;
 use Image;
 use App\Category;
 use App\Product;
+use App\ProductsAttribute;
 use Auth;
 
 
@@ -85,15 +86,8 @@ class ProductsController extends Controller
 
     public function viewProduct(Request $request){
 
-		$products = Product::get();
-        // $products = json_decode(json_encode($products));
-        // foreach($products as $key => $val){
-        //     $category_name = Category::where(['id'=>$val->category_id])->first();
-        //     $products[$key]->category_name = $category_name->name;
-        // }
-        //echo "<pre>"; print_r($products); die;
-		return view('admin.products.view_products')->with(compact('products'));
-		
+		$products = Product::with('getProducts')->get();		
+		return view('admin.products.view_products')->with(compact('products'));	
         
 	}
 	
@@ -152,4 +146,36 @@ class ProductsController extends Controller
 		// Product::where(['id'=>$id])->delete();
 		return redirect()->back()->with('flash_message_success','Image deleted successfully');
 	}
+
+	public function addAttributes(Request $request, $id = null){
+		$productDetails = Product::where(['id'=>$id])->first();
+		if($request->isMethod('post')){
+			$data = $request->all();
+			// echo "<pre>";
+			// print_r($data);
+			foreach($data['sku'] as $key => $val ){
+				if(!empty($val)){					
+					$attribute = new ProductsAttribute;
+					$attribute->product_id = $id;
+					$attribute->sku = $val;
+					$attribute->size = $data['size'][$key];
+					$attribute->price = $data['price'][$key];
+					$attribute->stock = $data['stock'][$key];
+					$attribute->save();
+				}
+			}
+		}
+		return view('admin.products.add_attributes')->with(compact('productDetails'));
+	}	
+
+
+
+
+
+
+
+
+
+
+
 }
