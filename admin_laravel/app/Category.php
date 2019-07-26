@@ -13,4 +13,10 @@ class Category extends Model
     public function childCategory(){
         return $this->hasMany(self::class, 'parent_id');
     }
+    
+    public function categories(){
+        return $this->hasMany('App\Category','parent_id');
+    }
+
+    
 }

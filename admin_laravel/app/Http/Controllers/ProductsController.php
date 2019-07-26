@@ -144,15 +144,13 @@ class ProductsController extends Controller
 
 	public function deleteProduct($id =null){
 		// Product::where(['id'=>$id])->delete();
-		return redirect()->back()->with('flash_message_success','Image deleted successfully');
+		return redirect()->back()->with('flash_message_success','Product deleted successfully');
 	}
 
-	public function addAttributes(Request $request, $id = null){
-		$productDetails = Product::where(['id'=>$id])->first();
+	public function addAttributes(Request $request, $id = null){		
+		
 		if($request->isMethod('post')){
-			$data = $request->all();
-			// echo "<pre>";
-			// print_r($data);
+			$data = $request->all();		
 			foreach($data['sku'] as $key => $val ){
 				if(!empty($val)){					
 					$attribute = new ProductsAttribute;
@@ -164,10 +162,32 @@ class ProductsController extends Controller
 					$attribute->save();
 				}
 			}
+			$productDetails = Product::with('attributes')->where(['id'=>$id])->first();
+			return view('admin.products.add_attributes')->with(compact('productDetails'));
 		}
+
+		$productDetails = Product::with('attributes')->where(['id'=>$id])->first();		
 		return view('admin.products.add_attributes')->with(compact('productDetails'));
 	}	
 
+	public function deleteAttribute($id = null){
+		
+		ProductsAttribute::where(['id'=>$id])->delete();
+		return redirect()->back()->with('flash_message_success','Product attribute deleted successfully');
+	}
+
+	public function products($url = null){
+		
+		$categoryUrl  = Category::where(['url' => $url])->first();
+		
+		$productAll = Product::where(['category_id' => $categoryUrl->id])->get();
+
+		$categories = Category::with('categories')->where(['parent_id'=>0])->get();  
+		// print_r($productAll);exit;
+		// $productAll = Product::get();
+		return view('products.listing')->with(compact('categoryUrl','categories','productAll'));
+
+	}
 
 
 

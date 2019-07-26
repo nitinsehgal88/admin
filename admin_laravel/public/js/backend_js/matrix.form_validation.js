@@ -245,7 +245,7 @@ $(document).ready(function(){
 		var id = $(this).attr('rel');
 		var deleteFunction  = $(this).attr('rell');
 		// alert(id);
-		// alert(iddeleteFunction);
+		// alert(deleteFunction);
 		swal({
 			title: "Are you sure?",
 			text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -257,9 +257,15 @@ $(document).ready(function(){
 			if (willDelete) {				
 				swal("Poof! Your imaginary file has been deleted!", {
 				icon: "success",				
-			  });			  
+			  });				  
+			  
 			  setTimeout(() => {
-				window.location.href="/admin/"+deleteFunction+"/"+id;	  
+				  if(deleteFunction == 'delete-product'){					
+					window.location.href="/admin/"+deleteFunction+"/"+id;	  
+				  }else if(deleteFunction == 'delete-attribute'){					  
+					window.location.href="/admin/"+deleteFunction+"/"+id;	  
+				  }
+				
 			  }, 3000);
 			  
 			} else {

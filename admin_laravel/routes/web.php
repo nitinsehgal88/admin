@@ -11,14 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', 'IndexController@index');
 
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
 Auth::routes();
+
+Route::get('/products/{url}', 'ProductsController@products');
+Route::get('/product/{id}', 'ProductsController@product');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/dashboard', 'AdminController@dashboard');      
@@ -41,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Product attributes
     Route::match(['get', 'post'], '/admin/add-attributes/{id}', 'ProductsController@addAttributes');
+    Route::match(['get', 'post'], '/admin/delete-attribute/{id}', 'ProductsController@deleteAttribute');
 });
 Route::get('/logout', 'AdminController@logout')->name('logout');  
 Route::get('/home', 'HomeController@index')->name('home');

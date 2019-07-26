@@ -10,4 +10,8 @@ class Product extends Model
         // return $this->hasOne('App\Category', 'id','category_id');
         return $this->belongsTo('App\Category', 'category_id','id');
     }
+
+    public function attributes(){
+        return $this->hasMany('App\ProductsAttribute','product_id');
+    }
 }
