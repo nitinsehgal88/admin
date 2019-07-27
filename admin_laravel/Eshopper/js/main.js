@@ -9,6 +9,7 @@
 /*scroll to top*/
 
 $(document).ready(function(){
+	alert("test");
 	$(function () {
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
@@ -26,5 +27,25 @@ $(document).ready(function(){
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
+	});
+});
+
+
+$(document).ready(function(){
+	$("selSize").change(function(){
+		var idSize = $(this).val();
+		alert(idSize);
+		$.ajax({
+			type:'get',
+			url:'/get-product-price',
+			data: {idSize:idSize} ,
+			success: function(res){
+				$("#getSize").html("$ "+res);
+				alert("success")
+			},
+			error:function(){
+				alert("error")
+			}
+		})
 	});
 });

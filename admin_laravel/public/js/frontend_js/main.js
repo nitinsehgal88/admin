@@ -28,3 +28,46 @@ $(document).ready(function(){
 		});
 	});
 });
+
+$(document).ready(function(){
+	$("#selSize").change(function(){
+		var idSize = $(this).val();	
+		if(idSize == ""){
+			return false;
+		}	
+		$.ajax({
+			type:'get',
+			url:'/get-product-price',
+			data: {idSize:idSize} ,
+			success: function(res){
+				// alert(res);
+				var arr = res.split("#");				
+				$("#getPrice").html("$ "+arr[0]);				
+				if(arr[1] == 0){
+					$("#cartButton").hide();
+					$("#Availability").text("Out of stock");
+					
+				}else{
+					$("#cartButton").show();
+					$("#Availability").text("In stock");
+				}
+			},
+			error:function(){
+				alert("error")
+			}
+		})
+	});
+});
+
+
+$(document).ready(function(){
+
+	
+
+	$('img')
+	  .wrap('<span style="display:inline-block"></span>')
+	//   .css('display', 'block')
+	  .parent()
+	  .zoom();
+	  
+  });

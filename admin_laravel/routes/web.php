@@ -23,6 +23,8 @@ Auth::routes();
 
 Route::get('/products/{url}', 'ProductsController@products');
 Route::get('/product/{id}', 'ProductsController@product');
+Route::get('/get-product-price', 'ProductsController@getProductPrice');
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/dashboard', 'AdminController@dashboard');      

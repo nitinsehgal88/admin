@@ -190,11 +190,27 @@ class ProductsController extends Controller
 	}
 
 
+	public function product($id = null){
+		
+		$productAll = Product::where(['id' => $id])->get();
+		$productDetail = Product::with('attributes')->where(['id' => $id])->first();
+		$productRecommend = Product::where('id' ,'!=', $id)->where(['category_id'=>$productDetail->category_id])->get();
+		$categories = Category::with('categories')->where(['parent_id'=>0])->get(); 
+		$total_stock = ProductsAttribute::where(['product_id' => $id])->sum('stock'); 
+
+		return view('products.detail')->with(compact('productAll','categories','productDetail','total_stock','productRecommend'));
+
+	}
 
 
 
-
-
+	public function getProductPrice(Request $request){
+		$data = $request->all();
+		$prodAr = explode("-",$data['idSize']);
+		$proAttr = ProductsAttribute::where(['product_id' => $prodAr[0],'size'=>$prodAr[1] ])->first();
+		echo $proAttr->price."#".$proAttr->stock;	
+		
+	}
 
 
 
